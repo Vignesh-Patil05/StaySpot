@@ -37,7 +37,7 @@ export default function BudgetFilter({ value, maxRent, onChange }) {
           whiteSpace: "nowrap"
         }}
       >
-        Budget
+        Price
       </Button>
 
       {/* Popover */}
