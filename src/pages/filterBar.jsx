@@ -35,6 +35,21 @@ export default function FilterBar({ filters, setFilters, maxRent, locationInput,
       setTempStatus(filters.status);
     }
   }, [filters, maxRent]);
+  
+{/* All Filters*/}
+  const applyFilters = () => {
+    setFilters((prev) => ({
+      ...prev,
+      location: locationInput,
+      minPrice: tempPriceRange[0],
+      maxPrice: tempPriceRange[1],
+      tenant: tempTenant,
+      propertyTypes: tempPropertyTypes,
+      status: tempStatus
+    }));
+
+    setAnchorEl(null);
+  };
 
   {/* Reset Filters */ }
   const handleFilterRest = () => {
@@ -81,10 +96,7 @@ export default function FilterBar({ filters, setFilters, maxRent, locationInput,
         onChange={(e) => setLocationInput(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            setFilters((prev) => ({
-              ...prev,
-              location: locationInput
-            }));
+            applyFilters();
           }
         }}
         fullWidth
@@ -101,14 +113,14 @@ export default function FilterBar({ filters, setFilters, maxRent, locationInput,
           input: { color: "#fff" }
         }}
       />
-      
+
       {/*Budget Filter*/}
       <BudgetFilter
         value={tempPriceRange}
         maxRent={maxRent}
         onChange={(priceRange) => setTempPriceRange(priceRange)}
       />
-      
+
       {/* Tenant Pill */}
       <TenantFilter
         value={tempTenant}
@@ -136,18 +148,7 @@ export default function FilterBar({ filters, setFilters, maxRent, locationInput,
           fontWeight: 600,
           whiteSpace: "nowrap"
         }}
-        onClick={() => {
-          setFilters((prev) => ({
-            ...prev,
-            minPrice: tempPriceRange[0],
-            maxPrice: tempPriceRange[1],
-            tenant: tempTenant,
-            propertyTypes: tempPropertyTypes,
-            status: tempStatus
-          }));
-
-          setAnchorEl(null); // close budget popover if open
-        }}
+        onClick={applyFilters}
       >
         Done
       </Button>
