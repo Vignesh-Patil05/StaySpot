@@ -17,6 +17,8 @@ import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { useRole } from "./RoleContext";
+import { Link as RouterLink } from "react-router-dom";
+
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -137,7 +139,7 @@ export default function SignIn() {
             {/* Footer links */}
             <Typography variant="body2" align="center" color="#aaa">
               Don’t have an account?{" "}
-              <Link href="/signup" sx={{ color: "#E53888" }}>
+              <Link component={RouterLink} to="/signup" sx={{ color: "#E53888" }}>
                 Sign Up
               </Link>
             </Typography>
